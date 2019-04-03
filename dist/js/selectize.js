@@ -2243,10 +2243,15 @@
 			var $input = this.$control_input;
 	
 			if (this.items.length) {
-				$input.removeAttr('placeholder');
+				if (this.settings.placeholderMore && self.settings.mode === 'multi') {
+					$input.attr('placeholder', this.settings.placeholderMore);
+				} else {
+					$input.removeAttr('placeholder');
+				}
 			} else {
 				$input.attr('placeholder', this.settings.placeholder);
 			}
+	
 			$input.triggerHandler('update', {force: true});
 		},
 	
