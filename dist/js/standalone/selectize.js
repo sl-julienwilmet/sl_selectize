@@ -2879,7 +2879,7 @@
 			var $input = this.$control_input;
 	
 			if (this.items.length) {
-				if (this.settings.placeholderMore && self.settings.mode === 'multi') {
+				if (this.settings.placeholderMore && this.settings.mode === 'multi') {
 					$input.attr('placeholder', this.settings.placeholderMore);
 				} else {
 					$input.removeAttr('placeholder');
