@@ -861,7 +861,7 @@ $.extend(Selectize.prototype, {
 		}
 
 		// ensure control has focus
-		self.hideInput();
+		self.setTextboxValue('');
 		if (!this.isFocused) {
 			self.focus();
 		}
