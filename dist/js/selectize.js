@@ -2958,9 +2958,9 @@
 	  };
 	
 	  options = $.extend({
-	      label: '&times;',
+	      label: 'icon-close',
 	      title: 'Remove',
-	      className: 'clearAll',
+	      className: 'selectize-clear',
 	      append: true,
 	      hideWhenEmpty: true,
 	      leaveOpen: false
