@@ -28,7 +28,7 @@ Selectize.define('clear_button', function (options) {
   }, options);
 
   var self = this,
-      $html = $('<span class="' +
+      $html = $('<span style="display:none;" class="' +
           options.className +
           '" tabindex="-1" title="' +
           escape_html(options.title) +
@@ -56,14 +56,17 @@ Selectize.define('clear_button', function (options) {
                   }
               }
 
-              hideShowClrBtn($input);
+              setTimeout(function() {
+                  hideShowClrBtn($input)
+              });
+
               $input.change(function () {
                   hideShowClrBtn($input);
               });
           }
 
           // add event listener
-          this.$wrapper.on('click', '.' + options.className, function (e) {
+          $html.on('click', function (e) {
               e.preventDefault();
               if (self.isLocked) return;
               self.clear();

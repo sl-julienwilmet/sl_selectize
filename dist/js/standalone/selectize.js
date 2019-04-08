@@ -1261,7 +1261,7 @@
 	
 			$wrapper          = $('<div>').addClass(settings.wrapperClass).addClass(classes).addClass(inputMode);
 			$control          = $('<div>').addClass(settings.inputClass).addClass('items').appendTo($wrapper);
-			$control_input    = $('<input type="text" autocomplete="off" />', { class: 'ignore' }).appendTo($control).attr('tabindex', $input.is(':disabled') ? '-1' : self.tabIndex);
+			$control_input    = $('<input/>', { class: 'ignore', type: 'text' }).attr('autocomplete', 'off').appendTo($control).attr('tabindex', $input.is(':disabled') ? '-1' : self.tabIndex);
 			$dropdown_parent  = $(settings.dropdownParent || $wrapper);
 			$dropdown         = $('<div>').addClass(settings.dropdownClass).addClass(inputMode).hide().appendTo($dropdown_parent);
 			$dropdown_content = $('<div>').addClass(settings.dropdownContentClass).appendTo($dropdown);
@@ -3603,7 +3603,7 @@
 	  }, options);
 	
 	  var self = this,
-	      $html = $('<span class="' +
+	      $html = $('<span style="display:none;" class="' +
 	          options.className +
 	          '" tabindex="-1" title="' +
 	          escape_html(options.title) +
@@ -3631,14 +3631,17 @@
 	                  }
 	              }
 	
-	              hideShowClrBtn($input);
+	              setTimeout(function() {
+	                  hideShowClrBtn($input)
+	              });
+	
 	              $input.change(function () {
 	                  hideShowClrBtn($input);
 	              });
 	          }
 	
 	          // add event listener
-	          this.$wrapper.on('click', '.' + options.className, function (e) {
+	          $html.on('click', function (e) {
 	              e.preventDefault();
 	              if (self.isLocked) return;
 	              self.clear();
