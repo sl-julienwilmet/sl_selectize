@@ -1989,6 +1989,7 @@
 				if (inputMode === 'multi' && self.isFull()) return;
 	
 				$item = $(self.render('item', self.options[value]));
+	
 				wasFull = self.isFull();
 				self.items.splice(self.caretPos, 0, value);
 				self.insertAtCaret($item);
@@ -2343,6 +2344,8 @@
 		 * @param {object} $el
 		 */
 		insertAtCaret: function($el) {
+			$el.addClass('-added');
+	
 			var caret = Math.min(this.caretPos, this.items.length);
 			var el = $el[0];
 			var target = this.buffer || this.$control[0];
@@ -2352,6 +2355,10 @@
 			} else {
 				target.insertBefore(el, target.childNodes[caret]);
 			}
+	
+			setTimeout(function() {
+				$el.removeClass('-added');
+			}, 250);
 	
 			this.setCaret(caret + 1);
 		},
