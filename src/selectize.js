@@ -644,7 +644,7 @@ $.extend(Selectize.prototype, {
 
 		var deactivate = function() {
 			self.close();
-			self.setTextboxValue('');
+			// self.setTextboxValue('');
 			self.setActiveItem(null);
 			self.setActiveOption(null);
 			self.setCaret(self.items.length);
@@ -861,7 +861,7 @@ $.extend(Selectize.prototype, {
 		}
 
 		// ensure control has focus
-		self.setTextboxValue('');
+		// self.setTextboxValue('');
 		if (!this.isFocused) {
 			self.focus();
 		}
@@ -1222,7 +1222,8 @@ $.extend(Selectize.prototype, {
 	 */
 	registerOption: function(data) {
 		var key = hash_key(data[this.settings.valueField]);
-		if (typeof key === 'undefined' || key === null || this.options.hasOwnProperty(key)) return false;
+		if (typeof key === 'undefined' || key === null) return false;
+		// if (this.options.hasOwnProperty(key)) return false;
 		data.$order = data.$order || ++this.order;
 		this.options[key] = data;
 		return key;
@@ -1382,6 +1383,7 @@ $.extend(Selectize.prototype, {
 		});
 		self.options = self.sifter.items = options;
 		self.lastQuery = null;
+		self.setTextboxValue('');
 		self.trigger('option_clear');
 	},
 
