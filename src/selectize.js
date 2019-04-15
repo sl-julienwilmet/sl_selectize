@@ -675,7 +675,7 @@ $.extend(Selectize.prototype, {
 	 * @returns {boolean}
 	 */
 	onOptionHover: function(e) {
-		if (this.ignoreHover) return;
+		if (this.settings.ignoreHover || this.ignoreHover) return;
 		this.setActiveOption(e.currentTarget, false);
 	},
 
