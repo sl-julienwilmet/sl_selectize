@@ -1677,7 +1677,7 @@ $.extend(Selectize.prototype, {
 
 		this.isInvalid = invalid;
 		this.$control_input.prop('required', invalid);
-		this.$input.prop('required', !invalid);
+		// this.$input.prop('required', !invalid);
 	},
 
 	/**
@@ -1781,6 +1781,7 @@ $.extend(Selectize.prototype, {
 		self.$dropdown.css({visibility: 'hidden', display: 'block'});
 		self.positionDropdown();
 		self.$dropdown.css({visibility: 'visible'});
+		self.$dropdown.get(0).scrollTop = 0;
 		self.trigger('dropdown_open', self.$dropdown);
 	},
 
