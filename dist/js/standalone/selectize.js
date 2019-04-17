@@ -1492,9 +1492,11 @@
 			// is ignored unless invoked within a click event)
 	    // also necessary to reopen a dropdown that has been closed by
 	    // closeAfterSelect
-			if (!self.isFocused || !self.isOpen) {
+			if (!self.isFocused) {
 				self.focus();
 				e.preventDefault();
+			} else if (!self.isOpen && e.target === self.$control_input.get(0)) {
+				self.refreshOptions();
 			}
 		},
 	
@@ -1738,13 +1740,9 @@
 			self.isFocused = true;
 			if (self.settings.preload === 'focus') self.onSearchChange('');
 	
-			if (!wasFocused) self.trigger('focus');
+			// if (!wasFocused) self.trigger('focus');
 	
-			if (!self.$activeItems.length) {
-				self.showInput();
-				self.setActiveItem(null);
-				self.refreshOptions(!!self.settings.openOnFocus);
-			}
+			self.refreshOptions(!!self.settings.openOnFocus);
 	
 			self.refreshState();
 		},
@@ -2076,8 +2074,8 @@
 			if (self.isDisabled) return;
 	
 			self.ignoreFocus = true;
-			self.$control_input[0].focus();
 			window.setTimeout(function() {
+				self.$control_input[0].focus();
 				self.ignoreFocus = false;
 				self.onFocus();
 			}, 0);
