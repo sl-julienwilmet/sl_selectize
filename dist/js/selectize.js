@@ -3017,6 +3017,7 @@
 	              e.preventDefault();
 	              if (self.isLocked) return;
 	              self.clear();
+	              self.clearOptions();
 	
 	              if (options.leaveOpen) {
 	                  self.$control_input.focus();
