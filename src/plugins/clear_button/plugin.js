@@ -70,7 +70,6 @@ Selectize.define('clear_button', function (options) {
               e.preventDefault();
               if (self.isLocked) return;
               self.clear();
-              self.clearOptions();
 
               if (options.leaveOpen) {
                   self.$control_input.focus();
