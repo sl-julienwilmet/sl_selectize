@@ -69,7 +69,8 @@ Selectize.define('clear_button', function (options) {
           $html.on('click', function (e) {
               e.preventDefault();
               if (self.isLocked) return;
-              self.clear();
+              self.clear(true);
+              self.clearOptions();
 
               if (options.leaveOpen) {
                   self.$control_input.focus();
