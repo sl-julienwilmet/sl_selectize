@@ -2061,7 +2061,7 @@
 				self.refreshState();
 				self.updatePlaceholder();
 				self.updateOriginalInput({silent: silent});
-				self.positionDropdown();
+	      setTimeout(self.positionDropdown.bind(this));
 				self.trigger('item_remove', value, $item);
 			}
 		},
