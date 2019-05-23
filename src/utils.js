@@ -317,7 +317,7 @@ var autoGrow = function($input) {
 		width = measureString(value, $input) + 4;
 		if (width !== currentWidth) {
 			currentWidth = width;
-			$input.width(width);
+      $input.css('minWidth', width);
 			$input.triggerHandler('resize');
 		}
 	};

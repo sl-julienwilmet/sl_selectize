@@ -148,6 +148,13 @@ $.extend(Selectize.prototype, {
 			$dropdown.addClass(classes);
 		}
 
+    if (self.settings.noTyping) {
+      $control_input.attr('readonly', 'readonly');
+      $control
+        .add($control_input)
+        .css('cursor', 'pointer');
+    }
+
 		$wrapper.css({
 			width: $input[0].style.width
 		});
@@ -545,7 +552,9 @@ $.extend(Selectize.prototype, {
 				return;
 			case KEY_BACKSPACE:
 			case KEY_DELETE:
-				self.deleteSelection(e);
+        if (!self.settings.stopBackspaceDelete) {
+          self.deleteSelection(e);
+        }
 				return;
 		}
 
@@ -599,9 +608,10 @@ $.extend(Selectize.prototype, {
 	 * @param {object} e (optional)
 	 * @returns {boolean}
 	 */
-	onFocus: function(e) {
-		var self = this;
-		var wasFocused = self.isFocused;
+	onFocus: function(e, triggerDropdown) {
+    var self = this;
+
+    triggerDropdown = triggerDropdown === true || (triggerDropdown !== false && !!self.settings.openOnFocus);
 
 		if (self.isDisabled) {
 			self.blur();
@@ -613,9 +623,7 @@ $.extend(Selectize.prototype, {
 		self.isFocused = true;
 		if (self.settings.preload === 'focus') self.onSearchChange('');
 
-		// if (!wasFocused) self.trigger('focus');
-
-		self.refreshOptions(!!self.settings.openOnFocus);
+    self.refreshOptions(triggerDropdown);
 
 		self.refreshState();
 	},
@@ -942,17 +950,17 @@ $.extend(Selectize.prototype, {
 	/**
 	 * Gives the control focus.
 	 */
-	focus: function() {
-		var self = this;
-		if (self.isDisabled) return;
+  focus: function(triggerDropdown) {
+    var self = this;
+    if (self.isDisabled) return;
 
-		self.ignoreFocus = true;
-		window.setTimeout(function() {
-			self.$control_input[0].focus();
-			self.ignoreFocus = false;
-			self.onFocus();
-		}, 0);
-	},
+    self.ignoreFocus = true;
+    window.setTimeout(function() {
+      self.$control_input[0].focus();
+      self.ignoreFocus = false;
+      self.onFocus(null, triggerDropdown);
+    }, 0);
+  },
 
 	/**
 	 * Forces the control out of focus.
@@ -1328,7 +1336,12 @@ $.extend(Selectize.prototype, {
 		// update the item if it's selected
 		if (self.items.indexOf(value_new) !== -1) {
 			$item = self.getItem(value);
-			$item_new = $(self.render('item', data));
+      $item_new = $(self.render('item', data));
+
+      if (self.settings.maxWidthItems) {
+        $item_new.css('maxWidth', self.settings.maxWidthItems);
+      }
+
 			if ($item.hasClass('active')) $item_new.addClass('active');
 			$item.replaceWith($item_new);
 		}
@@ -1498,6 +1511,10 @@ $.extend(Selectize.prototype, {
 			if (inputMode === 'multi' && self.isFull()) return;
 
 			$item = $(self.render('item', self.options[value]));
+
+      if (self.settings.maxWidthItems) {
+        $item.css('maxWidth', self.settings.maxWidthItems);
+      }
 
 			wasFull = self.isFull();
 			self.items.splice(self.caretPos, 0, value);
