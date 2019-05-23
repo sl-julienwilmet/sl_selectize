@@ -1093,7 +1093,7 @@
 			width = measureString(value, $input) + 4;
 			if (width !== currentWidth) {
 				currentWidth = width;
-	      $input.css('minWidth', width);
+	      $input.width(width);
 				$input.triggerHandler('resize');
 			}
 		};
