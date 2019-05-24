@@ -20,7 +20,6 @@ Selectize.define('clear_button', function (options) {
 
   options = $.extend({
       label: 'icon-close',
-      title: 'Remove',
       className: 'selectize-clear',
       append: true,
       hideWhenEmpty: true,
@@ -30,9 +29,7 @@ Selectize.define('clear_button', function (options) {
   var self = this,
       $html = $('<span style="display:none;" class="' +
           options.className +
-          '" tabindex="-1" title="' +
-          escape_html(options.title) +
-          '">' +
+          '" tabindex="-1">' +
           options.label +
           '</span>');
 

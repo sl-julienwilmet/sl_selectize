@@ -17,7 +17,6 @@
 Selectize.define('remove_button', function(options) {
 	options = $.extend({
 			label     : '&times;',
-			title     : 'Remove',
 			className : 'remove',
 			append    : true
 		}, options);
@@ -27,7 +26,7 @@ Selectize.define('remove_button', function(options) {
 			options.className = 'remove-single';
 
 			var self = thisRef;
-			var html = '<a href="javascript:void(0)" class="' + options.className + '" tabindex="-1" title="' + escape_html(options.title) + '">' + options.label + '</a>';
+			var html = '<a href="javascript:void(0)" class="' + options.className + '" tabindex="-1">' + options.label + '</a>';
 
 			/**
 			 * Appends an element as a child (with raw HTML).
