@@ -206,7 +206,7 @@ $.extend(Selectize.prototype, {
 		});
 
 		$control_input.on({
-			mousedown : function(e) { e.stopPropagation(); },
+			mousedown : function(e) { /* e.stopPropagation(); */ },
 			keydown   : function() { return self.onKeyDown.apply(self, arguments); },
 			keyup     : function() { return self.onKeyUp.apply(self, arguments); },
 			keypress  : function() { return self.onKeyPress.apply(self, arguments); },
