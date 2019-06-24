@@ -1903,6 +1903,10 @@ $.extend(Selectize.prototype, {
 		direction = (e && e.keyCode === KEY_BACKSPACE) ? -1 : 1;
 		selection = getSelection(self.$control_input[0]);
 
+    if (direction === -1 && selection.start > 0) {
+      return true;
+    }
+
 		if (self.$activeOption && !self.settings.hideSelected) {
 			option_select = self.getAdjacentOption(self.$activeOption, -1).attr('data-value');
 		}

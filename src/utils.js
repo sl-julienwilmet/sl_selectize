@@ -322,7 +322,15 @@ var autoGrow = function($input) {
 		}
 	};
 
-	$input.on('keydown keyup update blur', update);
+  $input.on('keydown keyup update blur', function(e) {
+    update()
+
+    if (e.type === 'blur') {
+      // FIX https://jira.seloger.tools/browse/LOCVAC-18788
+      $input.parent()[0].scrollLeft = 0;
+    }
+  });
+
 	update();
 };
 
