@@ -325,7 +325,7 @@ var autoGrow = function($input) {
   $input.on('keydown keyup update blur', function(e) {
     if (e.type === 'blur') {
       // FIX https://jira.seloger.tools/browse/LOCVAC-18788
-      $input.parent()[0].scrollLeft = 0;
+      $input[0].parentElement.scrollLeft = 0
     }
 
     update()
