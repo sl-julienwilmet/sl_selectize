@@ -3667,6 +3667,7 @@
 	  };
 	
 	  options = $.extend({
+	      title: '',
 	      label: 'icon-close',
 	      className: 'selectize-clear',
 	      append: true,
@@ -3727,6 +3728,7 @@
 	
 	Selectize.define('remove_button', function(options) {
 		options = $.extend({
+				title     : '',
 				label     : '&times;',
 				className : 'remove',
 				append    : true
