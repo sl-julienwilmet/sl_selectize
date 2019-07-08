@@ -19,6 +19,7 @@ Selectize.define('clear_button', function (options) {
   };
 
   options = $.extend({
+      title: '',
       label: 'icon-close',
       className: 'selectize-clear',
       append: true,
