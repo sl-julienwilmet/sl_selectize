@@ -1334,7 +1334,6 @@
 			$dropdown.on('mouseenter', '[data-selectable]', function() { return self.onOptionHover.apply(self, arguments); });
 			$dropdown.on('mousedown click', '[data-selectable]', function() { return self.onOptionSelect.apply(self, arguments); });
 			watchChildEvent($control, 'mousedown', '*:not(input)', function() { return self.onItemSelect.apply(self, arguments); });
-			autoGrow($control_input);
 	
 			$control.on({
 				mousedown : function() { return self.onMouseDown.apply(self, arguments); },
@@ -1430,6 +1429,13 @@
 				self.onSearchChange('');
 			}
 	
+	    if (!self.settings.noTyping) {
+	      autoGrow($control_input);
+	    } else {
+	      if (self.items.length) {
+	        self.hideInput()
+	      }
+	    }
 		},
 	
 		/**
@@ -2099,7 +2105,7 @@
 			var self = this;
 	
 			self.setTextboxValue('');
-			self.$control_input.css({opacity: 0, position: 'absolute', left: self.rtl ? 10000 : -10000});
+	    self.$control_input.css({opacity: 0, position: self.settings.noTyping ? 'relative' : 'absolute', left: self.rtl ? 10000 : -10000});
 			self.isInputHidden = true;
 		},
 	
