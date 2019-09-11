@@ -2890,7 +2890,7 @@
 				.toggleClass('full', isFull).toggleClass('not-full', !isFull)
 				.toggleClass('input-active', self.isFocused && !self.isInputHidden)
 				.toggleClass('dropdown-active', self.isOpen)
-				.toggleClass('has-options', !$.isEmptyObject(self.options))
+	      .toggleClass('has-options', Object.keys(self.options).length > self.items.length)
 	      .toggleClass('has-items', self.items.length > 0)
 	      .toggleClass('editing', self.isEditing);
 	
