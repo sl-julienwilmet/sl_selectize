@@ -1333,7 +1333,7 @@
 	
 			$dropdown.on('mouseenter mousedown click', '[data-disabled]>[data-selectable]', function(e) { e.stopImmediatePropagation(); });
 			$dropdown.on('mouseenter', '[data-selectable]', function() { return self.onOptionHover.apply(self, arguments); });
-			$dropdown.on('mousedown click', '[data-selectable]', function() { return self.onOptionSelect.apply(self, arguments); });
+			$dropdown.on('click', '[data-selectable]', function() { return self.onOptionSelect.apply(self, arguments); });
 			watchChildEvent($control, 'mousedown', '*:not(input)', function() { return self.onItemSelect.apply(self, arguments); });
 	
 			$control.on({
@@ -1367,7 +1367,7 @@
 			$document.on('mousedown' + eventNS, function(e) {
 				if (self.isFocused) {
 					// prevent events on the dropdown scrollbar from causing the control to blur
-					if (e.target === self.$dropdown[0] || e.target.parentNode === self.$dropdown[0]) {
+	        if (e.target === self.$dropdown[0] || e.target.parentNode === self.$dropdown[0] || $.contains(self.$dropdown[0], e.target)) {
 						return false;
 					}
 					// blur on click outside
