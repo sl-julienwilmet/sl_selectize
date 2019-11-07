@@ -1165,6 +1165,13 @@
 	
 	    self.isEditing = false;
 	
+	    if (!self.ignoreBlur && document.activeElement === self.$dropdown_content[0]) {
+	      // necessary to prevent IE closing the dropdown when the scrollbar is clicked
+	      self.ignoreBlur = true;
+	      self.onFocus(e);
+	      return;
+	    }
+	
 			var deactivate = function() {
 	      if (wasEditing && !self.$control_input.val().length && self.items.length) {
 	        self.$control.children(':not(input)').remove();
@@ -1507,6 +1514,10 @@
 		 */
 		blur: function(dest) {
 			this.$control_input[0].blur();
+	
+	    if (dest instanceof Element) {
+	      this.onBlur(null, dest);
+	    }
 		},
 	
 		/**
