@@ -3475,7 +3475,15 @@
 	
 		dropdownParent: null,
 	
-		copyClassesToDropdown: true,
+	  copyClassesToDropdown: true,
+	  stopBackspaceDelete: true,
+	  ignoreHover: true,
+	  noTyping: true,
+	  copyClassesToDropdown: false,
+	  closeAfterSelect: true,
+		labelField: 'label',
+		searchField: 'label',
+	
 	
 		/*
 		load                 : null, // function(query, callback) { ... }
@@ -3504,7 +3512,13 @@
 			optgroup_header: null,
 			option: null,
 			option_create: null
-			*/
+	    */
+	
+	    item: function(item, escape) {
+	      const shortName = item.label.split(',')[0];
+	
+	      return '<div title="' + (shortName !== item.label ? item.label : '') + '">' + escape(shortName) + '</div>';
+	    }
 		}
 	};
 	
